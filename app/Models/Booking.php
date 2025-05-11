@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Booking extends Model
 {
@@ -32,5 +33,15 @@ class Booking extends Model
             'vat' => 'integer',
             'grand_total' => 'integer',
         ];
+    }
+
+    public function carStore(): BelongsTo
+    {
+        return $this->belongsTo(CarStore::class);
+    }
+
+    public function carService(): BelongsTo
+    {
+        return $this->belongsTo(CarService::class);
     }
 }

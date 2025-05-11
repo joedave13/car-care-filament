@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CarStore extends Model
 {
@@ -25,5 +28,20 @@ class CarStore extends Model
             'is_open' => 'boolean',
             'is_full' => 'boolean'
         ];
+    }
+
+    public function carStorePhotos(): HasMany
+    {
+        return $this->hasMany(CarStorePhoto::class);
+    }
+
+    public function carServices(): BelongsToMany
+    {
+        return $this->belongsToMany(CarService::class);
+    }
+
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }

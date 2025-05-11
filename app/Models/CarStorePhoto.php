@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CarStorePhoto extends Model
 {
@@ -16,5 +17,10 @@ class CarStorePhoto extends Model
         return [
             'car_store_id' => 'integer'
         ];
+    }
+
+    public function carStore(): BelongsTo
+    {
+        return $this->belongsTo(CarStore::class);
     }
 }

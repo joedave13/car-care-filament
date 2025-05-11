@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class CarService extends Model
 {
@@ -22,5 +23,10 @@ class CarService extends Model
             'price' => 'integer',
             'duration_in_hour' => 'integer'
         ];
+    }
+
+    public function carStores(): BelongsToMany
+    {
+        return $this->belongsToMany(CarStore::class);
     }
 }
