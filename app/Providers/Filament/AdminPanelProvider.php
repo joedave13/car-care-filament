@@ -54,6 +54,10 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->darkMode(false, true);
+            ->darkMode(false, true)
+            ->navigationGroups([
+                'Master Data',
+                'Transaction'
+            ]);
     }
 }
