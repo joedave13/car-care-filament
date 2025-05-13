@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -120,7 +121,15 @@ class CarStoreResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    ActionGroup::make([
+                        Tables\Actions\ViewAction::make()->color('primary'),
+                        Tables\Actions\EditAction::make()->color('warning'),
+                    ])
+                        ->dropdown(false),
+                    Tables\Actions\DeleteAction::make()
+                ])
+                    ->icon('heroicon-m-bars-3')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -141,6 +150,7 @@ class CarStoreResource extends Resource
         return [
             'index' => Pages\ListCarStores::route('/'),
             'create' => Pages\CreateCarStore::route('/create'),
+            'view' => Pages\ViewCarStore::route('/{record}'),
             'edit' => Pages\EditCarStore::route('/{record}/edit'),
         ];
     }
