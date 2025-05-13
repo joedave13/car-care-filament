@@ -16,6 +16,7 @@ class CarStore extends Model
         'is_open',
         'is_full',
         'address',
+        'about',
         'customer_service_name',
         'customer_service_phone',
         'customer_service_avatar',
