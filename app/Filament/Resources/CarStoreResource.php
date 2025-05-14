@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CarStoreResource\Pages;
 use App\Filament\Resources\CarStoreResource\RelationManagers\CarServicesRelationManager;
+use App\Filament\Resources\CarStoreResource\RelationManagers\CarStorePhotosRelationManager;
 use App\Models\CarStore;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -141,7 +142,8 @@ class CarStoreResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CarServicesRelationManager::class
+            CarServicesRelationManager::class,
+            CarStorePhotosRelationManager::class
         ];
     }
 
