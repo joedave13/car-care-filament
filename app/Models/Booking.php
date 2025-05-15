@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionPaymentStatus;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -27,11 +28,11 @@ class Booking extends Model
     {
         return [
             'started_date' => 'date',
-            'started_time' => 'time',
             'price' => 'integer',
             'booking_fee' => 'integer',
             'vat' => 'integer',
             'grand_total' => 'integer',
+            'payment_status' => TransactionPaymentStatus::class
         ];
     }
 
