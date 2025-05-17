@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Booking\CheckBookingRequest;
 use App\Http\Requests\Booking\ConfirmBookingRequest;
 use App\Http\Requests\Booking\StoreBookingRequest;
 use App\Models\Booking;
@@ -76,5 +77,26 @@ class BookingController extends Controller
         $booking->load(['carStore', 'carStore.city', 'carStore.carStorePhotos', 'carService']);
 
         return view('pages.booking.show', compact('booking'));
+    }
+
+    public function check()
+    {
+        return view('pages.booking.check');
+    }
+
+    public function checkResult(CheckBookingRequest $request)
+    {
+        $validated = $request->validated();
+
+        $booking = Booking::query()
+            ->where('code', $validated['code'])
+            ->where('phone', $validated['phone'])
+            ->first();
+
+        if (!$booking) {
+            abort(404);
+        }
+
+        return redirect()->route('bookings.show', $booking);
     }
 }
