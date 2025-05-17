@@ -70,4 +70,11 @@ class BookingController extends Controller
 
         return view('pages.booking.success', compact('code'));
     }
+
+    public function show(Booking $booking)
+    {
+        $booking->load(['carStore', 'carStore.city', 'carStore.carStorePhotos', 'carService']);
+
+        return view('pages.booking.show', compact('booking'));
+    }
 }
