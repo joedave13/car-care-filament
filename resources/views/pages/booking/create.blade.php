@@ -58,9 +58,14 @@
     </div>
 
     <div class="flex h-full flex-1 mt-5">
-        <form action="{{ route('bookings.confirm') }}"
+        <form action="{{ route('bookings.save') }}"
             class="w-full flex flex-col rounded-t-[30px] p-5 pt-[30px] gap-[26px] bg-white overflow-x-hidden mb-0 mt-auto"
             method="POST">
+            @csrf
+
+            <input type="hidden" name="car_store_id" value="{{ $carStore->id }}">
+            <input type="hidden" name="car_service_id" value="{{ $carService->id }}">
+
             <div class="flex flex-col gap-2">
                 <h2 class="font-semibold">Choose Time</h2>
                 <div class="flex items-center gap-2">

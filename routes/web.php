@@ -27,5 +27,6 @@ Route::controller(BookingController::class)
     ->name('bookings.')
     ->group(function () {
         Route::get('/create', 'create')->name('create');
-        Route::post('/confirm', 'confirm')->name('confirm');
+        Route::post('/save', 'save')->name('save');
+        Route::get('/confirm', 'confirm')->name('confirm');
     });
