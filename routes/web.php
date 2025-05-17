@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarServiceController;
+use App\Http\Controllers\CarStoreController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,4 +12,11 @@ Route::controller(CarServiceController::class)
     ->name('car-services.')
     ->group(function () {
         Route::get('/show', 'show')->name('show');
+    });
+
+Route::controller(CarStoreController::class)
+    ->prefix('car-stores')
+    ->name('car-stores.')
+    ->group(function () {
+        Route::get('/{carStore}', 'show')->name('show');
     });
