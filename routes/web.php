@@ -29,4 +29,5 @@ Route::controller(BookingController::class)
         Route::get('/create', 'create')->name('create');
         Route::post('/save', 'save')->name('save');
         Route::get('/confirm', 'confirm')->name('confirm');
+        Route::post('/store', 'store')->name('store');
     });
