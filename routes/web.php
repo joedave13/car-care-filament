@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CarServiceController;
 use App\Http\Controllers\CarStoreController;
 use App\Http\Controllers\HomeController;
@@ -19,4 +20,12 @@ Route::controller(CarStoreController::class)
     ->name('car-stores.')
     ->group(function () {
         Route::get('/{carStore}', 'show')->name('show');
+    });
+
+Route::controller(BookingController::class)
+    ->prefix('bookings')
+    ->name('bookings.')
+    ->group(function () {
+        Route::get('/create', 'create')->name('create');
+        Route::post('/confirm', 'confirm')->name('confirm');
     });

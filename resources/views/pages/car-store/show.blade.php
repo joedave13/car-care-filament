@@ -166,7 +166,13 @@
             <p class="font-bold text-xl leading-[30px]">Rp {{ number_format($carService->price, 0, ',', '.') }}</p>
             <p class="text-sm leading-[21px] text-[#909DBF]">{{ $carService->duration_in_hour }} Hours</p>
         </div>
-        <a href="booking.html" class="rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white">Booking Now</a>
+        @if (!$carStore->is_open || $carStore->is_full)
+            <a href="javascript:void(0)" class="rounded-full p-[12px_20px] bg-[#EEEFF4] font-bold text-[#AAADBF]">Full
+                Booked</a>
+        @else
+            <a href="{{ route('bookings.create', ['car_store_id' => $carStore->id, 'car_service_id' => $carService->id]) }}"
+                class="rounded-full p-[12px_20px] bg-[#FF8E62] font-bold text-white">Booking Now</a>
+        @endif
     </div>
 
     <!-- About modal -->
