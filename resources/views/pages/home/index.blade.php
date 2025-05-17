@@ -17,7 +17,7 @@
                 <div class="w-6 h-6 flex shrink-0 mr-[6px]">
                     <img src="{{ asset('assets/images/icons/location-normal.svg') }}" alt="icon">
                 </div>
-                <select name="location" id="Location" class="bg-white font-semibold w-full outline-none">
+                <select name="location" id="city-id" class="bg-white font-semibold w-full outline-none">
                     @foreach ($cities as $city)
                         <option value="{{ $city->id }}">{{ $city->name }}</option>
                     @endforeach
@@ -29,7 +29,8 @@
             <h1 class="font-semibold text-white">Our Great Services</h1>
             <div class="grid grid-cols-3 gap-4">
                 @foreach ($carServices as $carService)
-                    <a href="store-list.html" class="card-services">
+                    <a href="javascript:void(0)" class="service-link card-services"
+                        data-car-service-id="{{ $carService->id }}">
                         <div
                             class="rounded-[20px] border border-[#E9E8ED] py-4 flex flex-col items-center text-center gap-4 bg-white transition-all duration-300 hover:ring-2 hover:ring-[#FF8E62]">
                             <div class="w-[50px] h-[50px] flex shrink-0">
@@ -56,4 +57,26 @@
             </div>
         </a>
     </section>
+
+    @include('includes.bottom-navigation')
+
+    @push('scripts')
+        <script>
+            document.querySelectorAll('.service-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const cityId = document.getElementById('city-id').value;
+                    const carStoreServiceId = this.getAttribute('data-car-service-id');
+
+                    if (cityId && carStoreServiceId) {
+                        window.location.href =
+                            `/car-services/show?id=${carStoreServiceId}&city_id=${cityId}`;
+                    } else {
+                        window.location.href = 'javascript:void(0)';
+                    }
+                })
+            });
+        </script>
+    @endpush
 @endsection
