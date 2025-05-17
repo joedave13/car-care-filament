@@ -31,4 +31,5 @@ Route::controller(BookingController::class)
         Route::get('/confirm', 'confirm')->name('confirm');
         Route::post('/store', 'store')->name('store');
         Route::get('/success', 'success')->name('success');
+        Route::get('/{booking:code}', 'show')->name('show');
     });

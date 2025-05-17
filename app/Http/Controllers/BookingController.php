@@ -59,6 +59,15 @@ class BookingController extends Controller
 
         $booking = Booking::query()->create($session);
 
-        return redirect()->route('booking.success', ['code' => $booking->code]);
+        Session::forget('booking_data');
+
+        return redirect()->route('bookings.success', ['code' => $booking->code]);
+    }
+
+    public function success(Request $request)
+    {
+        $code = $request->code;
+
+        return view('pages.booking.success', compact('code'));
     }
 }
