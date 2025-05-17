@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Booking\ConfirmBookingRequest;
+use App\Http\Requests\Booking\StoreBookingRequest;
+use App\Models\Booking;
 use App\Models\CarService;
 use App\Models\CarStore;
 use Carbon\Carbon;
@@ -46,5 +48,17 @@ class BookingController extends Controller
         $carService = CarService::query()->find($booking['car_service_id']);
 
         return view('pages.booking.confirm', compact('booking', 'carStore', 'carService'));
+    }
+
+    public function store(StoreBookingRequest $request)
+    {
+        $session = Session::get('booking_data', []);
+
+        $session['code'] = 'BK' . date('ymd') . rand(000, 999);
+        $session['payment_proof'] = $request->file('payment_proof')->store('booking/payment-proof', 'public');
+
+        $booking = Booking::query()->create($session);
+
+        return redirect()->route('booking.success', ['code' => $booking->code]);
     }
 }
